@@ -67,7 +67,7 @@ Other functions are mainly to assist with data wrangling in the main processing 
 
 Make sure data files have been downloaded, including SPURS mooring TS and met files, either from PODACC or the WHOI UOP website. If you are reprocessing the dissipation data, run the processing section described above. 
 
-Code to generate Figures 2-13, and 15 is available in blocked sections in "PrintFigures2.m". Figure 1 was drafted in Inkscape and not generated from code. Figure 14 was created in python, and is available at a separate repository here: https://github.com/jtomfarrar/SPURS_Nortek_plots
+Code to generate Figures 2-13, and 15 is available in blocked sections in "PrintFigures2.m". Figure 1 was drafted in Inkscape and not generated from code. Figure 14 was created in python, and is available at a separate repository here: https://github.com/jtomfarrar/SPURS1_SST_map
 
 Spefics requirements for code blocks in "PrintFigures2.m":
 - Figures 5-7: requires burst level data, which can accessed by running the processing script on the raw data (as described above) or by contacting the author
