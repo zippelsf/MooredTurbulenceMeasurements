@@ -119,16 +119,17 @@ bad_pts = [];
 sum_DOF = DOF*sum(good_pts);
 epsilon_CI = epsilon .* ([chi2inv(1-0.95, sum_DOF)/sum_DOF, chi2inv(0.95, sum_DOF)/sum_DOF]).^(3/2);
 
-%% QC Check (if fit SNR is larger than 95%CI)
-%coef1  = 18/55 * (8/9/0.4)^(2/3); %Veron&Melville 1999 JTECH coeff
-coef1 = 0.53; %changed to Sreenivasan 1995
-fit_snr = coef1*k(3).^(-5/3).*epsilon.^(2/3) ./ sigma2_k(1);
-
-alpha = 0.01;
-err_high = DOF*sum(good_pts)./chi2inv(1-alpha/2, DOF*sum(good_pts));
-if (fit_snr < (1-err_high) )
-    epsilon = NaN;
-end
+% REMOVED - was erroniously left in after testing, 5/26/21
+% %% QC Check (if fit SNR is larger than 95%CI)
+% %coef1  = 18/55 * (8/9/0.4)^(2/3); %Veron&Melville 1999 JTECH coeff
+% coef1 = 0.53; %changed to Sreenivasan 1995
+% fit_snr = coef1*k(3).^(-5/3).*epsilon.^(2/3) ./ sigma2_k(1);
+% 
+% alpha = 0.01;
+% err_high = DOF*sum(good_pts)./chi2inv(1-alpha/2, DOF*sum(good_pts));
+% if (fit_snr < (1-err_high) )
+%     epsilon = NaN;
+% end
 
 %% PLOTS -
 if plots == 1
