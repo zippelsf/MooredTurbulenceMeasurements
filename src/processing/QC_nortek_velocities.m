@@ -132,8 +132,8 @@ for ii = 1:nProfiles
     end
 end
 
-vQC = vQC(boolean(no_consec_nan_profiles),:);
-cQC = cQC(boolean(no_consec_nan_profiles),:);
+vQC = vQC(logical(no_consec_nan_profiles),:);
+cQC = cQC(logical(no_consec_nan_profiles),:);
 
 %% STEP E - Linear interp over NaN values
 

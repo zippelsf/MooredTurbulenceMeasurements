@@ -129,7 +129,9 @@ for HR_id = 1:length(id_list)
         parfor fi = 1:length(raw_files)
 %        for fi  = 1:length(raw_files)
             %---------------- Load burst --------------------------------
+            warning('off')
             raw = load([fp raw_files(fi).name],'v1','a1','c1','sen','vUnwrap');
+            warning('on')
             C = struct(); %structure to hold processing results
             temp = struct();%structure to hold unsaved results
             
@@ -162,7 +164,7 @@ for HR_id = 1:length(id_list)
                 %[C.vUnwrap] = snaphu2Dunwrap(raw.v1(:,3:end), raw.a1(:,3:end), raw.c1(:,3:end), instrument.Vr, pwd, hash);
                 %C.vUnwrap = C.vUnwrap'; %Codes used to row/column swap...
                 
-                [len,nbins] = size(C.vUnwrap);
+                %[len,nbins] = size(C.vUnwrap);
             elseif ~isfield(raw,'vUnwrap')
                 C.vUnwrap = nan( size(raw.v1(:,3:end)) );
                 C.Vr = nan;
@@ -228,7 +230,7 @@ for HR_id = 1:length(id_list)
                     C.DOF = nan;
                     C.diss_flag = nan;
                     C.processing_opt_args = nan;
-                    %warning('wavenumber_dissipation failed...')
+                    warning('wavenumber_dissipation failed...')
                 end
             else
                 C.epsilon = nan;
