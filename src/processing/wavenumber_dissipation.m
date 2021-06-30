@@ -87,30 +87,30 @@ elseif taper == 0
 end
 P_avg  = mean(pxx,2);
 
-%%  Estimate instrument noise from correlations
+%%  Estimate instrument noise from correlations - removed this functionality for now, noise is part of fitting procedure
 
 %NOISE PARAMS ESTIMATED FROM INSTRUMENT SETUP
-
-if strcmp(noise_model, 'Shcherbina2018')
-    M = instrument.mAvg; %number of avg'd samples
-    sigma2_s  = ((cQC./100).^-2 - 1)./(2*M) .* ( instrument.Vr ./ pi).^2;%squared error earlier.. now same notation as in Shcherbina'18
-    sigma2_s(isinf(sigma2_s))  =  nan; %in case  of R2=0
-    sigma2_s_avg  =  nanmean(nanmean(sigma2_s));
-    sigma2_k = sigma2_s_avg./k(end);
-
-elseif strcmp(noise_model, 'Zedel1996')
-    M = instrument.mAvg; %number of avg'd samples
-    sigma2_s  = log((cQC./100)) .* (-2) .* ( instrument.Vr ./ pi).^2 ./M;
-    sigma2_s(isinf(sigma2_s))  =  nan; %
-    sigma2_s_avg  =  nanmean(nanmean(sigma2_s));
-    sigma2_k = sigma2_s_avg./k(end);
-end
+% 
+% if strcmp(noise_model, 'Shcherbina2018')
+%     M = instrument.mAvg; %number of avg'd samples
+%     sigma2_s  = ((cQC./100).^-2 - 1)./(2*M) .* ( instrument.Vr ./ pi).^2;%squared error earlier.. now same notation as in Shcherbina'18
+%     sigma2_s(isinf(sigma2_s))  =  nan; %in case  of R2=0
+%     sigma2_s_avg  =  nanmean(nanmean(sigma2_s));
+%     sigma2_k = sigma2_s_avg./k(end);
+% 
+% elseif strcmp(noise_model, 'Zedel1996')
+%     M = instrument.mAvg; %number of avg'd samples
+%     sigma2_s  = log((cQC./100)) .* (-2) .* ( instrument.Vr ./ pi).^2 ./M;
+%     sigma2_s(isinf(sigma2_s))  =  nan; %
+%     sigma2_s_avg  =  nanmean(nanmean(sigma2_s));
+%     sigma2_k = sigma2_s_avg./k(end);
+% end
 
 %% Estimate dissipation
 
 good_pts = zeros(size(k));
 good_pts(k_inds) = 1;
-good_pts = boolean(good_pts);
+good_pts = logical(good_pts);
 
 [epsilon, sigma2_k] = fit_ISR(P_avg(good_pts), k(good_pts),'Linear','LS', -99, instrument.Lxmit, instrument.Lrecv);
 bad_pts = [];
